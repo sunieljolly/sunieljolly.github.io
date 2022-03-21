@@ -107,7 +107,7 @@ async function getBootstrap() {
       console.log(
         data.statusText + ": Something went wrong. Please try again later"
        );
-       alert('Line 112')
+       location.reload();
     },
   });
   setTimeout(function () {
@@ -121,7 +121,6 @@ async function getBootstrap() {
         alert(
           data.statusText + ": Something went wrong. Please try again later"
         );
-        alert('Line 126')
         location.reload();
       },
     });
