@@ -56,7 +56,6 @@ async function getStatus() {
             alert(error.responseText + " Please come back later");
           }
           reject(error);
-          console.log(error);
         },
       });
     }),
