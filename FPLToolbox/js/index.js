@@ -71,7 +71,6 @@ async function getStatus() {
         alert(
           data.statusText + ": Something went wrong. Please try again later"
         );
-        alert('Line 74')
         location.reload();
       },
     })
@@ -124,6 +123,7 @@ async function getBootstrap() {
           data.statusText + ": Something went wrong. Please try again later"
         );
         alert('Line 126')
+        location.reload();
       },
     });
   }, 2000);
@@ -327,7 +327,7 @@ const mostFrequent = (arr) =>
   function leagueLoader() {
     var elem = document.getElementById("myBar");   
     var width = 0;
-    var id = setInterval(frame, 100);
+    var id = setInterval(frame, 60);
     function frame() {
       if (width >= 100) {
         clearInterval(id);        
