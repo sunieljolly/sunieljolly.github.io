@@ -1,17 +1,9 @@
 //////////////////////////BASE URLS/////////////////////////////////////////////////////////////////////
 BASE_URL = "https://myfpl-proxy.herokuapp.com/http://fantasy.premierleague.com/api/";
 IMAGE_URL = "https://myfpl-proxy.herokuapp.com/http://resources.premierleague.com/premierleague/photos/players/110x140/p";
-//TEAM_IMAGE_URL = 'https://myfpl-proxy.herokuapp.com/http://resources.premierleague.com/premierleague/badges/50/t'
-
-//BASE_URL = "http://fantasy.premierleague.com/api/";
-//IMAGE_URL =
-//  "http://resources.premierleague.com/premierleague/photos/players/110x140/p";
-//TEAM_IMAGE_URL = "http://resources.premierleague.com/premierleague/badges/50/t";
-////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////GOOGLE CHARTS CODE//////////////////////////////////////////////////////////////////////
 google.charts.load("current", { packages: ["table"] });
 google.charts.load("current", { packages: ["corechart"] });
-//google.charts.load("current", { packages: ["line"] });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 var teamId = "";
 var leagueId = "";
@@ -43,16 +35,10 @@ var gameweeksPoints = [];
 var footballer = {};
 var liveFootballer = {};
 var footballerId;
-var plTable = {};
-var plFixtures = {};
-var thisWeekFixtures = [];
 var plTeam = {};
 var manager;
-var diffA = [];
-var diffB = [];
 var eventStatusDate;
 var eventStatus;
-
 var fplpink = "#FF1751";
 var fpldarkred = "#80072D";
 var fplgreen = "#01FC7A";
@@ -117,9 +103,6 @@ async function getBootstrap() {
           previousGwDeadline = bootstrap.events[i].deadline_time;
         }
       }
-      //console.log('Bootstrap Data...')
-      //console.log(bootstrap)
-      //console.log("Current Game Week is " + currentGw)
     },
     error: function (data) {
       console.log(
@@ -133,8 +116,6 @@ async function getBootstrap() {
       type: "GET",
       success: function (data) {
         gameweekLiveData = data;
-        console.log('Gameweek Live Data...')
-        console.log(gameweekLiveData)
       },
       error: function (data) {
         alert(
@@ -174,9 +155,6 @@ async function loadTeam(teamId) {
       url: BASE_URL + "/entry/" + teamId + "/",
       type: "GET",
       success: function (managerData) {
-        //resolve(data)
-        console.log("Manager data...");
-        console.log(managerData);
         teamName = managerData.name;
         managerName = managerData.player_first_name;
         overallPoints = managerData.summary_overall_points;
@@ -189,8 +167,6 @@ async function loadTeam(teamId) {
         reject(error);
       },
     });
-    //console.log("Team data...");
-    //console.log(team);
     document.getElementById("table").innerHTML = ('<div class="w3-light-grey">' +
    '<div id="myBar" class="w3-container w3-center" style="width:20%; background-color:var(--fplblue)">20%</div></div>')
    leagueLoader();
@@ -199,7 +175,6 @@ async function loadTeam(teamId) {
 }
 
 function showLeagues() {
-  // CREATES TABLE WITH AVAILABLE LEAGUES
   var data = new google.visualization.DataTable();
   data.addColumn("number", "ID");
   data.addColumn("string", "League");
@@ -221,14 +196,11 @@ function showLeagues() {
       hoverTableRow: "hoverTableRow",
     },
   };
-
   var table = new google.visualization.Table(document.getElementById("table"));
-
   google.visualization.events.addListener(table, "select", selectHandler);
   var view = new google.visualization.DataView(data);
   view.hideColumns([0]); // array of column indexes to hide
   table.draw(view, options);
-
   function selectHandler() {
     var selectedItem = table.getSelection()[0];
     if (selectedItem) {
@@ -243,37 +215,18 @@ function showLeagues() {
 }
 
 function submitLeague(selectedLeague) {
-  //document.getElementById("table").innerHTML = "";
-  hideMenu();
+ hideMenu();
    document.getElementById("table").innerHTML = ('<div class="w3-light-grey">' +
    '<div id="myBar" class="w3-container w3-center" style="width:20%; background-color:var(--fplblue);">0%</div></div>')
    leagueLoader();
-  //setTimeout(function() {document.getElementById('view2').innerHTML='';},1000);
   league = [];
   leagueInfo = [];
-  //setTimeout(function(){ clearLeagueViews(); }, 1000);
-  //document.getElementById('enter_button').innerHTML='';
-
   createLeague(selectedLeague)
     .then((data) => {
-      //addGameWeeksPoints();
       addChips();
-      //addPreviousSeasons();
       setTimeout(function () {
         addCurrentWeekData();
       }, 500);
-      //addTransferHistory();
-      //addGameWeeksTransfers();
-      //addGameWeeksBenchPoints();
-      //addGameWeeksTransfersCost();
-      //setTimeout(function () {
-      //  addAllGw();
-      //}, 600);
-      console.log("League information...");
-      console.log(leagueInfo);
-      leagueName = leagueInfo[0].name;
-      console.log("League details...");
-      console.log(league);
     })
     .catch((error) => {
       console.log(error);
@@ -290,7 +243,6 @@ async function createLeague(selectedLeague) {
       type: "GET",
       success: function (league_data) {
         resolve(league_data);
-        console.log(league_data);
         if (league_data.standings.has_next == true || league_data.standings.results.length > 50) {
           alert(
             "League too big to compare, please try another league with fewer teams"
@@ -301,8 +253,7 @@ async function createLeague(selectedLeague) {
           leagueInfo.push(league_data.league);
           for (var i = 0; i < league_data.standings.results.length; i++) {
             league.push(league_data.standings.results[i]);
-          }    
-
+          }   
             document.getElementById("username").innerHTML = "<p>Welcome, " + managerName + "!</p>";
             document.getElementById("league-name").innerHTML ="<p>" + league_data.league.name + "</p>";
             
@@ -336,9 +287,7 @@ function hideMenu() {
   document.getElementById("m-change-league").innerHTML ='';
 }
 function createMenu() {
-  document.getElementById("table").innerHTML = "";
-
-  
+  document.getElementById("table").innerHTML = "";  
   document.getElementById("league-table").innerHTML ='<p onclick="leagueTable()">League Table</p>';
   document.getElementById("m-league-table").innerHTML ='<p onclick="leagueTable()">League Table</p>';
 
@@ -359,7 +308,7 @@ function createMenu() {
   '<d class="center"><p>' + gWAverageScore + '</p><p>Avg.</p></d>' +
   '<d class="center"><p>' + eventPoints + '</p><p>Points</p></d>' +
   '<d class="center"><p>' + gwHighestScore + '</p><p>Highest</p></d></div>');
-
+  leagueTable()
 }
 
 const average = (array) => array.reduce((a, b) => a + b) / array.length;
