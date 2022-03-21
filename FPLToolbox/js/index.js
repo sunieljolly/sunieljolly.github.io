@@ -71,6 +71,7 @@ async function getStatus() {
         alert(
           data.statusText + ": Something went wrong. Please try again later"
         );
+        alert('Line 74')
         location.reload();
       },
     })
@@ -107,7 +108,8 @@ async function getBootstrap() {
     error: function (data) {
       console.log(
         data.statusText + ": Something went wrong. Please try again later"
-      );
+       );
+       alert('Line 112')
     },
   });
   setTimeout(function () {
@@ -121,6 +123,7 @@ async function getBootstrap() {
         alert(
           data.statusText + ": Something went wrong. Please try again later"
         );
+        alert('Line 126')
       },
     });
   }, 900);
