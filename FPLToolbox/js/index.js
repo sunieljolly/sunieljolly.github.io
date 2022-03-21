@@ -126,7 +126,7 @@ async function getBootstrap() {
         alert('Line 126')
       },
     });
-  }, 900);
+  }, 2000);
 }
 getBootstrap();
 
