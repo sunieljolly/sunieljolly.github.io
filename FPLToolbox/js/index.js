@@ -44,6 +44,7 @@ var fpldarkred = "#80072D";
 var fplgreen = "#01FC7A";
 var fplyellow = "#d8bd14";
 var fplblue = "#81bcff";
+var fpllightpurple = "#963CFF";
 
 async function getStatus() {
   return (

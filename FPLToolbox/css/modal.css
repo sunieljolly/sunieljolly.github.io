@@ -57,7 +57,7 @@
   
   .modal-header {
     padding: 2px 16px;
-    background-color: var(--fplgreen);
+    background-color: var(--fpllightpurple);
     color: white;
   }
   
@@ -68,6 +68,6 @@
   
   .modal-footer {
     padding: 2px 16px;
-    background-color: var(--fplgreen);
+    background-color: var(--fpllightpurple);
     color: white;
   }
