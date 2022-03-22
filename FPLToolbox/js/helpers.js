@@ -92,8 +92,7 @@ function addCurrentWeekData(){
 				url: BASE_URL + "entry/" + league[i].entry + "/event/" + currentGw + "/picks/",
 				type: "GET",
 				success: function (team_picks){
-					if(team_picks){
-						
+					if(team_picks){						
 						league[i].currentWeek = [];
 						league[i].currentWeek.push(team_picks);	
 					}
@@ -119,35 +118,43 @@ function addChips(){
 				type: "GET",
 				success: function (team_data){
 					league[i].chips = [];
+					//CHIP 1
 					if(team_data.chips[0]){
 						league[i].chips.push({name: team_data.chips[0].name, time: team_data.chips[0].time, gw: team_data.chips[0].event});
 					}else{
 						league[i].chips.push(null);	
 					}
-					///////////
+					//CHIP 2
 					if(team_data.chips[1]){
 						league[i].chips.push({name: team_data.chips[1].name, time: team_data.chips[1].time, gw: team_data.chips[1].event});			
 					}else{
 						league[i].chips.push(null);		
 					}
-					///////////
+					//CHIP 3
 					if(team_data.chips[2]){
 						league[i].chips.push({name: team_data.chips[2].name, time: team_data.chips[2].time, gw: team_data.chips[2].event});	
 					}else{
 						league[i].chips.push(null);				
 					}
-					///////////
+					//CHIP 4
 					if(team_data.chips[3]){
 						league[i].chips.push({name: team_data.chips[3].name, time: team_data.chips[3].time, gw: team_data.chips[3].event});
 					}else{
 						league[i].chips.push(null);	
 					}
-					//////////
+					//CHIP 5
 					if (team_data.chips[4]){
 						league[i].chips.push({name: team_data.chips[4].name, time: team_data.chips[4].time, gw: team_data.chips[4].event});	
 					}else{
 						league[i].chips.push(null);	
-					}				
+					}
+					//CHIP 6
+					if (team_data.chips[5]){
+						league[i].chips.push({name: team_data.chips[5].name, time: team_data.chips[5].time, gw: team_data.chips[5].event});	
+					}else{
+						league[i].chips.push(null);	
+					}
+
 				}
 			})
 		}

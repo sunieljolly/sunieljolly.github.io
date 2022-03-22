@@ -200,7 +200,7 @@ function showLeagues() {
   var table = new google.visualization.Table(document.getElementById("table"));
   google.visualization.events.addListener(table, "select", selectHandler);
   var view = new google.visualization.DataView(data);
-  view.hideColumns([0]); // array of column indexes to hide
+  view.hideColumns([0]);
   table.draw(view, options);
   function selectHandler() {
     var selectedItem = table.getSelection()[0];
