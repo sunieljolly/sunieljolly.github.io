@@ -245,9 +245,10 @@ async function createLeague(selectedLeague) {
       success: function (league_data) {
         resolve(league_data);
         if (league_data.standings.has_next == true || league_data.standings.results.length > 50) {
-          alert(
-            "League too big to compare, please try another league with fewer teams"
-          );
+          modal.style.display = "block";
+          span.onclick = function() {
+            modal.style.display = "none";
+          }
           showLeagues(teamId);
           return;
         } else {
@@ -337,4 +338,3 @@ const mostFrequent = (arr) =>
     }
 
   }
-  
